@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <haed>
+        <title>Movie Genres Classification based on Poster Images with Deep Neural Networks</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/all.min.css') }}">
+        <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    </haed>
+    <body>
+        <div class="container">
+            <div class="intro">
+                <div class="intro-img fl">
+                    <img src="https://render.fineartamerica.com/images/rendered/default/print/8/8/break/images-medium-5/cameraman-vintage-film-movie-camera-side-cartoon-aloysius-patrimonio.jpg">
+                </div>
+                <div class="intro-text fl">
+                    <h1 class="title">Movie Genres Classification</h1>
+                    <p class="desc">Movie Genre Classification based on Poster Images with Deep Neural Networks</p>
+                </div>
+                <div class="intro-img fl reverse-img">
+                    <img src="https://render.fineartamerica.com/images/rendered/default/print/8/8/break/images-medium-5/cameraman-vintage-film-movie-camera-side-cartoon-aloysius-patrimonio.jpg">
+                </div>
+            </div>
+
+            <div class="clear"></div>
+            <div class="poster fl">
+                <div class="img-cont">
+                    <div class="loader">
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                          </div>
+                    </div>
+                    {% if filename %}
+                    <img src="{{ url_for('static', filename = 'img/'+filename) }}">
+                    {% else %}
+                    <img src="https://cdn.pixabay.com/photo/2018/05/20/00/15/tv-3414704_960_720.png">
+                    {% endif %}
+                </div>
+                <form id="form" method='post' action='/api' enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" class="inputfile" value="">
+                    <label for="file"><i class="fas fa-image fa-lg"></i></label>
+                    <input id="submitBtn" type="submit" value="Check Movie Genres" disabled>
+                </form>
+            </div>
+
+            <div class="categories fl">
+
+                {% if sorted_y %}
+                <div class="pred-details-cont">
+                {%for i in range(0, len)%} 
+                <div class="pred-details">
+                    <span class="progress-title">{{classes[y_prob.index(sorted_y[i])]}}</span> 
+                    <span class="progress-container">
+                        <span class="progress" style="width:{{sorted_y[i]*100}}%"></span>
+                    </span>  
+                </div>
+                {% endfor %}
+                </div>
+
+                <div class="top3">
+                    <!--
+                        <h2>Top <img class="threeimg" src="https://icons.iconarchive.com/icons/custom-icon-design/flatastic-4/512/Number-3-icon.png"> Genres</h2>
+                    -->
+                    <h2>Top Three Genres</h2>
+                    <div class="top3-details">
+                        <div class="topGenres">
+                            <div class="genre">{{top3[0]}}</div>
+                        </div>
+                        <div class="topGenres">
+                            <div class="genre">{{top3[1]}}</div>
+                        </div>
+                        <div class="topGenres">
+                            <div class="genre">{{top3[2]}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                <span style="font-size:66px;position: absolute;color:#CCC;left: 37%;top: 18px;"><i class="fas fa-image fa-lg"></i></span>
+                <p class="hint">No image uploaded yet ! Please upload movie poster to know genres of it</p>
+                <img class="arrow" src="https://www.freepnglogos.com/uploads/arrow-png/arrow-brushes-design-png-34.png">
+                {% endif %}
+            </div>
+
+        </div>
+        
+        <script src="{{ url_for('static', filename = 'js/custom.js') }}"></script>
+        <script src="{{ url_for('static', filename = 'js/all.min.js') }}"></script>
+    </body>
+</html>
