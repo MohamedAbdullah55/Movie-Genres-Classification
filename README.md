@@ -36,6 +36,7 @@ Simpel web api/service to detect movie genres based on poster image with Deep Ne
 
 ![screenshot](https://i.imgur.com/dWmwWJQ.png)
 
+
 * Author Name : Mohamed Abdullah
 * Author links :   
 <ol>
@@ -45,6 +46,9 @@ Simpel web api/service to detect movie genres based on poster image with Deep Ne
 </ol>
                                       
 * Version : v.1.0
+
+## Contributing
+Any kind of enhancement or contribution is welcomed
 
 **If you find this repo useful star it to help others see it**
 <br>
